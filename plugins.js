@@ -7,7 +7,9 @@ var $plugins =
     {"name":"cardbattle_manager","status":true,"description":"","parameters":{}},
     {"name":"game_cardplayer","status":true,"description":"","parameters":{}},
     {"name":"scene_cardbattle","status":true,"description":"","parameters":{}},
-    {"name":"sprite_background","status":true,"description":"","parameters":{}}
+    {"name":"spriteset_cardbattle","status":true,"description":"","parameters":{}},
+    {"name":"sprite_background","status":true,"description":"","parameters":{}},
+    {"name":"window_title","status":true,"description":"","parameters":{}}
 ];
 
 

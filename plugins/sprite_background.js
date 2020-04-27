@@ -14,7 +14,6 @@ SpriteBackground.prototype.initialize = function (background) {
     this._directionY = 0;
     this._speed = 1;
     this._active = true;
-    this.visible = false;
     this.createLayers();
     this.movementPosition(background.move);
 };

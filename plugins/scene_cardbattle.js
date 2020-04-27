@@ -12,33 +12,23 @@ SceneCardBattle.prototype.constructor = SceneCardBattle;
 
 SceneCardBattle.prototype.initialize = function() {
     Scene_Base.prototype.initialize.call(this);
-    this._background = null;
+    this._spriteset = null;
 
 };
 
 SceneCardBattle.prototype.create = function() {
     Scene_Base.prototype.create.call(this);
-    this.createBackground();
-    this.addChild(this._background);
+    this.createDisplayObjects();
+
 };
-
-SceneCardBattle.prototype.createBackground = function() {
-    this._background = new SpriteBackground({
-        filename: 'BackgroundCardBattle',
-        move: { x: 'right', y: 'down'}
-    });
-
-}
 
 SceneCardBattle.prototype.start = function() {
     Scene_Base.prototype.start.call(this);
-    this._background.show();
 
 };
 
 SceneCardBattle.prototype.update = function() {
     Scene_Base.prototype.update.call(this);
-    this._background.update();
 
 };
 
@@ -51,3 +41,26 @@ SceneCardBattle.prototype.terminate = function() {
     Scene_Base.prototype.terminate.call(this);
 
 };
+
+SceneCardBattle.prototype.createDisplayObjects = function() {
+    this.createSpriteset();
+    this.createWindowLayer();
+
+    this.tests();
+
+}
+
+SceneCardBattle.prototype.createSpriteset = function() {
+    this._spriteset = new Spriteset_CardBattle();
+    this.addChild(this._spriteset);
+
+}
+
+SceneCardBattle.prototype.tests  =function() {
+    this._win = new WindowTitle();
+    this.addWindow(this._win);
+    
+    this._win.addText("TEST");
+    this._win.refresh();
+    this._win.open();
+}
