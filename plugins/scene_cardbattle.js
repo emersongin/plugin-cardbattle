@@ -72,7 +72,9 @@ SceneCardBattle.prototype.createTextWindow = function() {
 
 SceneCardBattle.prototype.createFolderSelectionWindow = function() {
     this._folderSelectionWindow = new WindowFolderSelection($gameCardPlayer.getFolders());
-    this._folderSelectionWindow.move(0, Graphics.boxHeight / 2.3);
+    this._folderSelectionWindow.setHandler('FIRST_FOLDER', this.cmd.bind(this, 1));
+    this._folderSelectionWindow.setHandler('SECOND_FOLDER', this.cmd.bind(this, 2));
+    this._folderSelectionWindow.setHandler('THIRD_FOLDER', this.cmd.bind(this, 3));
     this.addWindow(this._folderSelectionWindow);
 }
 
@@ -85,16 +87,11 @@ SceneCardBattle.prototype.tests = function() {
     // this._textWindow.refresh();
     // this._textWindow.open();
 
-    this._folderSelectionWindow.setHandler('OPTION_FOLDER_1', this.cmd.bind(this));
-    this._folderSelectionWindow.setHandler('OPTION_FOLDER_2', this.cmd.bind(this));
-    this._folderSelectionWindow.setHandler('OPTION_FOLDER_3', this.cmd.bind(this));
 
-    this._folderSelectionWindow.activate()
     this._folderSelectionWindow.open();
-
-    console.log(this._folderSelectionWindow.isOpen());
 }
 
-SceneCardBattle.prototype.cmd = function() {
-
+SceneCardBattle.prototype.cmd = function(index) {
+    console.log(index);
+    this._folderSelectionWindow.close();
 }

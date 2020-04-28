@@ -5,44 +5,41 @@ function WindowFolderSelection() {
 WindowFolderSelection.prototype = Object.create(Window_Command.prototype);
 WindowFolderSelection.prototype.constructor = WindowFolderSelection;
     
-WindowFolderSelection.prototype.initialize = function (folders) {
+WindowFolderSelection.prototype.initialize = function(folders) {
     this._folders = folders;
     this._energieFolders = [];
+    this.createEnergieFolders();
     Window_Command.prototype.initialize.call(this, 0, 0);
     this.openness = 0;
-    this.createEnergieFolders();
-    this.refresh();
+    this.move(Graphics.boxWidth / 16, Graphics.boxHeight / 3.5, 
+                this.windowWidth(), this.windowHeight());
 };
 
-WindowFolderSelection.prototype.getSEnergiesFolder = function (index) {
-    return this._energieFolders[index];
-};
-
-WindowFolderSelection.prototype.windowWidth = function () {
+WindowFolderSelection.prototype.windowWidth = function() {
     return 714;
 };
 
-WindowFolderSelection.prototype.windowHeight = function () {
+WindowFolderSelection.prototype.windowHeight = function() {
     return Graphics.boxHeight / 2;
 };
 
-
-WindowFolderSelection.prototype.numberVisibleRows = function () {
+WindowFolderSelection.prototype.numVisibleRows = function() {
     return 3;
 };
 
-WindowFolderSelection.prototype.itemHeight = function () {
-    let contentHeight = this.height - (this.padding * 2);
-    return Math.floor(contentHeight / this.numberVisibleRows());
+WindowFolderSelection.prototype.itemHeight = function() {
+    return 92;
+    let contentHeight = this.height - this.padding * 2;
+    return Math.floor(contentHeight / this.numVisibleRows());
 };
 
-WindowFolderSelection.prototype.createEnergieFolders = function () {
+WindowFolderSelection.prototype.createEnergieFolders = function() {
     this._folders.forEach(folder => {
         this.createSpecialEnergiesFolder(folder.collection);
     });
 };
 
-WindowFolderSelection.prototype.createSpecialEnergiesFolder = function (collection) {
+WindowFolderSelection.prototype.createSpecialEnergiesFolder = function(collection) {
     let SEnergies = new GameSpecialEnergies();
 
     collection.forEach(gameStoredCard => {
@@ -53,19 +50,23 @@ WindowFolderSelection.prototype.createSpecialEnergiesFolder = function (collecti
     this._energieFolders.push(SEnergies);
 };
 
-WindowFolderSelection.prototype.makeCommandList = function () {
-    this._folders.forEach((folder, index) => {
-        this.addCommand(folder.name, "OPTION_FOLDER_" + index);
-    });
+WindowFolderSelection.prototype.getSEnergiesFolder = function(index) {
+    return this._energieFolders[index];
 };
 
-WindowFolderSelection.prototype.drawItem = function (index) {
+WindowFolderSelection.prototype.makeCommandList = function() {
+    this.addCommand(this._folders[0].name, "FIRST_FOLDER");
+    this.addCommand(this._folders[1].name, "SECOND_FOLDER");
+    this.addCommand(this._folders[2].name, "THIRD_FOLDER");
+};
+
+WindowFolderSelection.prototype.drawItem = function(index) {
     var rect = this.itemRectForText(index);
     this.drawTextEx(this.commandName(index), rect.x, rect.y + 10);
     this.drawTextEx(this.drawSpecialEnergiesIcons(index), rect.x, rect.y + 50);
 };
 
-WindowFolderSelection.prototype.drawSpecialEnergiesIcons = function (index) {
+WindowFolderSelection.prototype.drawSpecialEnergiesIcons = function(index) {
     let SEnergies = null;
     let label = "";
     let indexIcon = 20;
@@ -84,9 +85,3 @@ WindowFolderSelection.prototype.drawSpecialEnergiesIcons = function (index) {
     }
 
 };
-
-
-// WindowFolderSelection.prototype.update = function() {
-//     Window_Command.prototype.update.call(this);
-
-// }
