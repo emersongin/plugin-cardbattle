@@ -1,8 +1,4 @@
 
-/**
- * @GLOBALS
- * 
- */
 var $dataCards = null;
 var $dataChallenges = null;
 var $gameCardPlayer = null;

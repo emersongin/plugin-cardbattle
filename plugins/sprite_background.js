@@ -1,6 +1,5 @@
 function SpriteBackground() {
     this.initialize.apply(this, arguments);
-
 }
 
 SpriteBackground.prototype = Object.create(Sprite.prototype);

@@ -1,8 +1,3 @@
-/**
- * @static @class
- * 
- */
-
 function CardBattleManager() {
     throw new Error('This is a static class');
 
